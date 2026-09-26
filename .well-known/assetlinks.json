@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.blackandblue.pact",
+      "sha256_cert_fingerprints": [
+        "C1:60:A4:6F:5F:35:C3:39:DD:AD:3F:3E:12:64:81:3A:9C:DA:BA:30:1E:CC:97:86:E4:A8:28:CF:5F:4F:26:00"
+      ]
+    }
+  }
+]
