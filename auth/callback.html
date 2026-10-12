@@ -1,0 +1,85 @@
+---
+layout: null
+permalink: /auth/callback
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Continue in Pact · BlackAndBlue</title>
+  <style>
+    :root { color-scheme: light; font-family: ui-sans-serif, system-ui, sans-serif; }
+    * { box-sizing: border-box; }
+    body { background: #fbf9f8; color: #292c29; margin: 0; }
+    main { max-width: 38rem; margin: auto; padding: clamp(2rem, 8vw, 5rem) 1.5rem; }
+    .brand { display: flex; align-items: center; gap: .8rem; font-weight: 750; }
+    .brand img { border-radius: 15px; }
+    section { margin-top: 2rem; padding: 2rem; background: white; border: 1px solid #eee5df; border-radius: 24px; }
+    h1 { font-size: 2rem; line-height: 1.15; }
+    p { color: #505a51; line-height: 1.65; }
+    button { background: #99472f; color: white; border: 0; border-radius: 12px; padding: .8rem 1.25rem; min-height: 48px; font: inherit; font-weight: 700; cursor: pointer; }
+    a { color: #99472f; }
+    button:focus-visible, a:focus-visible { outline: 3px solid #4a654f; outline-offset: 3px; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="brand"><img src="/blackandblue-mark.png" width="48" height="48" alt="BlackAndBlue logo"> BlackAndBlue / Pact</div>
+    <section aria-live="polite">
+      <h1 id="title">Open a fresh Pact link</h1>
+      <p id="message">Request a fresh sign-in or recovery email in Pact on this device.</p>
+      <button id="open" type="button" hidden>Continue in Pact</button>
+      <p>If Pact does not open, open the app and request a new link on this device. This page does not sign you in or change your password.</p>
+      <p>Need help? <a href="mailto:contact@blackandblue.co.in?subject=Pact%20account%20help">Contact support</a>. Never send us your password or authentication link.</p>
+      <noscript><p>Open Pact and request a fresh link, or enable JavaScript to continue in the app.</p></noscript>
+    </section>
+  </main>
+  <script>
+    function pactHandoff(href) {
+      const url = new URL(href);
+      if (url.origin !== "https://pact.blackandblue.co.in" || url.pathname !== "/auth/callback" || url.hash) return null;
+      const allowed = new Set(["code", "token_hash", "type", "pact_flow"]);
+      const params = url.searchParams;
+      if ([...params.keys()].some(key => !allowed.has(key) || params.getAll(key).length !== 1)) return null;
+      const code = params.get("code");
+      const token = params.get("token_hash");
+      const type = params.get("type");
+      const flow = params.get("pact_flow");
+      const otpTypes = new Set(["signup", "magiclink", "invite", "recovery", "email_change", "email"]);
+      const valid = value => value !== null && value.length > 0 && value.length <= 4096 && !/[\u0000-\u0020\u007f]/.test(value);
+      if ((code !== null) === (token !== null) || !valid(code ?? token) ||
+          (type !== null && !otpTypes.has(type)) || (token !== null && type === null) ||
+          (flow !== null && flow !== "recovery")) return null;
+      const query = new URLSearchParams();
+      if (code !== null) query.set("code", code);
+      else query.set("token_hash", token);
+      if (type !== null) query.set("type", type);
+      if (flow !== null) query.set("pact_flow", flow);
+      return "intent://pact.blackandblue.co.in/auth/callback?" + query.toString() +
+        "#Intent;scheme=https;package=com.blackandblue.pact;end";
+    }
+    (() => {
+      let handoff = pactHandoff(location.href);
+      history.replaceState(null, "", location.pathname);
+      const button = document.getElementById("open");
+      if (handoff) {
+        document.getElementById("title").textContent = "Continue in Pact";
+        document.getElementById("message").textContent = "Use the button to finish securely inside the Pact app on this device.";
+        button.hidden = false;
+      }
+      button.addEventListener("click", () => {
+        if (!handoff) return;
+        const destination = handoff;
+        handoff = null;
+        button.disabled = true;
+        location.href = destination;
+      });
+      addEventListener("pagehide", () => { handoff = null; button.disabled = true; });
+    })();
+  </script>
+</body>
+</html>
