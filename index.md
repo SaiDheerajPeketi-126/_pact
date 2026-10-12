@@ -31,7 +31,7 @@ Pact is designed not to send habit names, proof photos, passwords, email address
 
 ## 5. Optional purchases
 
-Pact may offer Premium subscriptions or other paid plans that unlock paid features. It may also offer optional, repeatable **Student Developer Support** purchases at locally displayed store prices corresponding to US $1, $10, and $100 tiers. Support purchases are a way to support the developer; they do not unlock Premium or another lasting entitlement, are not charitable donations, and are not tax-deductible.
+Pact may offer Premium subscriptions or other paid plans that unlock paid features. It may also offer optional, repeatable **Student Developer Support** purchases at locally displayed store prices corresponding to US $1, $10, $100, and $999 tiers. Support purchases are a way to support the student developer; they do not unlock Premium or another lasting entitlement, are not charitable donations, and are not tax-deductible.
 
 Google Play processes payment. RevenueCat helps validate purchases, restore eligible entitlements, and synchronize subscription status. These services may process transaction and purchase history, product identifiers, subscription status, device or installation information, and Pact’s authenticated account identifier. Pact does not receive or store full payment-card details.
 
@@ -60,7 +60,7 @@ In Pact, open **Settings → Delete account**, review the warning, and confirm d
 
 Account deletion does not cancel a Google Play subscription. Use **Settings → Manage subscription** or Google Play’s subscription page first if you need to stop future billing.
 
-If you cannot access the app, email **developer@blackandblue.co.in** with the subject **Pact privacy request** from the email address associated with your Pact account. Do not send your password, payment-card details, Google Play purchase token, or proof photos.
+If you cannot access the app, email **contact@blackandblue.co.in** with the subject **Pact privacy request** from the email address associated with your Pact account. Do not send your password, payment-card details, Google Play purchase token, or proof photos.
 
 ## 9. Children
 
@@ -74,7 +74,7 @@ Pact is provided on an “as available” basis. Habit streaks, reminders, partn
 
 ## 11. Support {#support}
 
-For product help, billing questions, privacy requests, or safety concerns, email **developer@blackandblue.co.in**. Include the app name and a concise description, but do not send passwords, payment-card information, authentication links, raw purchase tokens, or private proof photos.
+For product help, billing questions, privacy requests, or safety concerns, email **contact@blackandblue.co.in**. Include the app name and a concise description, but do not send passwords, payment-card information, authentication links, raw purchase tokens, or private proof photos.
 
 ## 12. Changes
 
@@ -83,7 +83,7 @@ We may update this policy when Pact, its service providers, or legal requirement
 ## 13. Contact
 
 - **Developer:** Black and Blue
-- **Email:** developer@blackandblue.co.in
+- **Email:** contact@blackandblue.co.in
 - **Privacy page:** https://pact.blackandblue.co.in/
 
 Users in India may send privacy questions or complaints to the email address above. This contact statement does not designate a statutory grievance officer or publish unverified legal or postal details.
